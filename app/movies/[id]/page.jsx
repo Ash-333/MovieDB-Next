@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function MovieDetailsPage() {
+export default function MovieDetailsPage({ params }) {
   const [movie, setMovie] = useState(null);
-  const router = useRouter();
-  const id = 912649;
+  const id = params.id;
+  console.log(id);
 
   useEffect(() => {
     const options = {
@@ -18,7 +17,7 @@ export default function MovieDetailsPage() {
       },
     };
     if (id) {
-      fetch(`${process.env.API_BASE_URL}/movie/${id}`, options)
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/movie/${id}`, options)
         .then((res) => res.json())
         .then((data) => setMovie(data));
     }
